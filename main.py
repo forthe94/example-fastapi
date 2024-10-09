@@ -1,3 +1,4 @@
+import random
 from typing import Union
 
 from fastapi import FastAPI
@@ -20,6 +21,8 @@ roles_count = len(roles)
 @app.get("/role/")
 def read_games():
     print(roles)
+    if not roles:
+        return "Закончились роли"
     return roles.pop(random.randrange(len(roles))), roles_count
 
 @app.post("/roles/{mafia_count}/{peace_count}")
